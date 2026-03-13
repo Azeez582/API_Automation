@@ -1,0 +1,1280 @@
+
+
+
+You are a senior QA Automation Architect with 15+ years of experience in API automation, Playwright, Python, and Pytest.
+
+Your job is to teach me **API Automation from beginner to advanced level** using **Python, Pytest, and Playwright** in a **structured step-by-step course format**.
+
+My goal is to **become interview-ready for QA Automation / SDET roles**, so every topic must include:
+
+1. **Concept explanation (simple and clear)**
+2. **Why this concept is used in real automation frameworks**
+3. **Hands-on coding examples**
+4. **Project implementation**
+5. **Common interview questions and answers**
+6. **Real-world scenarios used by automation engineers**
+
+We will build a **real API automation framework step by step**, starting from scratch.
+
+The teaching structure must follow this roadmap:
+
+PHASE 1 – API FUNDAMENTALS
+
+* What is an API
+* REST API architecture
+* HTTP methods (GET, POST, PUT, DELETE, PATCH)
+* HTTP status codes
+* Headers
+* Authentication
+* JSON structure
+* Request vs Response
+* Idempotency
+
+PHASE 2 – ENVIRONMENT SETUP
+
+* Install Python
+* Install Pytest
+* Install Playwright
+* Install Requests library
+* Setup project folder structure
+* Setup virtual environment
+* Create requirements.txt
+
+PHASE 3 – FIRST API TESTS
+
+* Write first GET request
+* Write first POST request
+* Validate response
+* Assertions in Pytest
+* Response parsing
+
+PHASE 4 – FRAMEWORK DESIGN
+Explain how **real automation frameworks are structured** and build this structure:
+
+project_root
+│
+├── tests
+├── api
+├── payloads
+├── utils
+├── config
+├── fixtures
+├── conftest.py
+├── requirements.txt
+
+Explain the responsibility of each folder.
+
+PHASE 5 – ADVANCED API AUTOMATION
+
+* Dynamic JSON payload
+* Multiple user creation
+* Data-driven testing
+* Pytest fixtures
+* Environment configs
+* Logging
+* Test utilities
+* Faker for test data
+* Parameterization
+
+PHASE 6 – AUTHENTICATION
+
+* Token authentication
+* Bearer tokens
+* OAuth basics
+* Storing tokens
+* Using tokens in tests
+
+PHASE 7 – REAL WORLD TESTING
+
+* Validating API response structure
+* Negative testing
+* Error handling
+* Response schema validation
+
+PHASE 8 – DATABASE VALIDATION
+Teach SQL needed for API testing:
+
+* SELECT
+* JOIN
+* WHERE
+* GROUP BY
+* validating API data with database
+
+IMPORTANT TEACHING RULES
+
+1. Teach **one concept at a time**
+2. After each topic give **practice tasks**
+3. Explain **common interview mistakes**
+4. Explain **how interviewers ask this topic**
+5. Show **best practices used by senior SDET engineers**
+
+Assume I am a **beginner in API automation but I want to become advanced**.
+
+Never skip steps and never jump ahead.
+We will build the framework gradually while learning the concepts.
+
+Great mindset, Azeez. 🚀
+We will treat this exactly like industry training for a QA Automation / SDET role. I’ll guide you step-by-step, exactly how senior automation engineers build frameworks in real companies.
+
+We will not jump topics.
+We will master one concept → practice → then move forward.
+
+API Automation Mastery Roadmap (Python + Pytest + Playwright)
+Here is the complete journey we will follow.
+
+PHASE 1 — API FUNDAMENTALS
+What is an API
+
+How APIs work
+
+REST API architecture
+
+HTTP Methods
+
+HTTP Status Codes
+
+Headers
+
+Authentication
+
+JSON structure
+
+Request vs Response
+
+Idempotency
+
+PHASE 2 — ENVIRONMENT SETUP
+Python installation
+
+Virtual environment
+
+Install pytest
+
+Install requests
+
+Install Playwright
+
+Project structure
+
+requirements.txt
+
+PHASE 3 — FIRST API TESTS
+First GET request
+
+First POST request
+
+Response validation
+
+Assertions in pytest
+
+Parsing JSON
+
+PHASE 4 — FRAMEWORK DESIGN
+We will build a real SDET automation framework
+
+api_automation_framework
+│
+├── tests
+├── api
+├── payloads
+├── utils
+├── config
+├── fixtures
+├── conftest.py
+├── requirements.txt
+PHASE 5 — ADVANCED AUTOMATION
+Dynamic payloads
+
+Faker data
+
+Data driven tests
+
+Parameterization
+
+Logging
+
+Utilities
+
+PHASE 6 — AUTHENTICATION
+Token auth
+
+Bearer tokens
+
+OAuth basics
+
+Token storage
+
+PHASE 7 — REAL WORLD TESTING
+Response schema validation
+
+Negative testing
+
+Error handling
+
+PHASE 8 — DATABASE VALIDATION
+(SQL for QA)
+
+SELECT
+
+WHERE
+
+JOIN
+
+GROUP BY
+
+API + DB validation
+
+PHASE 1 — API FUNDAMENTALS
+Lesson 1 — What is an API
+Simple Explanation
+API = Application Programming Interface
+
+An API allows two software systems to communicate with each other.
+
+Think of it like a messenger between systems.
+
+Example:
+
+Mobile App  →  API  →  Database
+or
+
+Frontend UI  →  API  →  Backend service
+The API sends a request and receives a response.
+
+Real Life Example
+Imagine ordering food.
+
+Customer → Waiter → Kitchen
+Customer = Client
+Waiter = API
+Kitchen = Server / Database
+
+Steps:
+
+1️⃣ You order food
+2️⃣ Waiter takes the order to the kitchen
+3️⃣ Kitchen prepares food
+4️⃣ Waiter returns food
+
+Exactly how API works.
+
+Technical Flow
+Client → API Request → Server → Database
+                       ↓
+                API Response
+Example:
+
+Client sends:
+
+GET /users/1
+Server responds:
+
+{
+ "id":1,
+ "name":"John",
+ "email":"john@email.com"
+}
+Where APIs are Used (Real Industry Examples)
+Login System
+Frontend sends:
+
+POST /login
+API validates user and returns:
+
+token
+E-commerce
+Request:
+
+GET /products
+Response:
+
+list of products
+Banking Apps
+Request:
+
+GET /account/balance
+Response:
+
+balance data
+Why API Testing is Important
+Companies test APIs because:
+
+UI depends on APIs
+
+APIs handle business logic
+
+APIs are faster to test
+
+APIs catch bugs earlier
+
+Example bug:
+
+UI shows wrong price
+Root cause:
+
+API returned wrong data
+So API automation is critical for QA Engineers.
+
+API vs UI Testing (Interview Favorite)
+Feature	UI Testing	API Testing
+Speed	Slow	Fast
+Stability	Flaky	Stable
+Execution	Browser	Direct server
+Debugging	Hard	Easy
+Most companies prefer:
+
+70% API tests
+20% Integration
+10% UI
+Real Example API
+We will practice using a public API used by many automation engineers.
+
+https://reqres.in
+Example endpoint:
+
+GET https://reqres.in/api/users/2
+Response:
+
+{
+ "data":{
+  "id":2,
+  "email":"janet.weaver@reqres.in",
+  "first_name":"Janet"
+ }
+}
+Interview Questions
+Q1 — What is an API?
+Answer:
+
+API is a communication interface that allows two software systems to interact with each other using requests and responses.
+
+Q2 — Why is API testing important?
+Answer:
+
+APIs contain core business logic
+
+Faster execution than UI tests
+
+Finds defects early
+
+Enables microservices testing
+
+Q3 — Difference between API and Web Service?
+Answer:
+
+API	Web Service
+Any communication interface	Must use network
+Can be local	Always remote
+REST, GraphQL etc	SOAP, REST
+Common Beginner Mistakes
+❌ Thinking API testing requires UI knowledge
+❌ Not understanding request/response structure
+❌ Ignoring status codes
+❌ Not validating response data
+
+Practice Tasks
+Task 1
+Open browser and run:
+
+https://reqres.in/api/users/1
+Observe:
+
+Response structure
+
+JSON format
+
+Task 2
+Answer these:
+
+1️⃣ What does API stand for?
+2️⃣ What are the 2 main components of API communication?
+3️⃣ What role does the API play between client and server?
+
+Next Lesson
+In the next step we will learn:
+
+REST API Architecture
+This is one of the most important concepts asked in interviews.
+
+You will learn:
+
+REST
+
+Resources
+
+Endpoints
+
+Stateless architecture
+
+Why REST dominates modern systems
+
+If you want, I can also show you something very useful for interviews next:
+
+"How APIs work inside real microservice architectures at companies like Amazon, Flipkart, and PayPal."
+
+That understanding impresses interviewers a lot.
+
+
+{"error":"missing_api_key","message":"The x-api-key header is required for this endpoint.","hint":"Create a free key at app.reqres.in and send it as x-api-key.","next_steps":["Go to app.reqres.in/api-keys to get your key","Add header: x-api-key: <your_key>","For app user endpoints, use Authorization: Bearer <session_token> instead"],"docs_url":"https://app.reqres.in/docs#authentication","example_curl":"curl -H \"x-api-key: YOUR_API_KEY\" https://api.reqres.in/api/collections","_meta":{"powered_by":"ReqRes","docs_url":"https://app.reqres.in/documentation","upgrade_url":"https://app.reqres.in/upgrade","example_url":"https://app.reqres.in/examples/notes-app","variant":"v1_a","message":"API key invalid or revoked. Create a new key in API Keys.","cta":{"label":"Get a key","url":"https://app.reqres.in/api-keys"},"context":"invalid_key"}}   this is the resoponse that i got from that url      next What does API stand for? >application programming interface , What are the 2 main components of API communication? end point and methods we use get post patch delete   next What role does the API play between client and server? it acts as a mediator which serve the command
+
+Great job attempting the tasks, Azeez. 👍
+You are thinking in the right direction, but let’s correct and refine a few things so your answers become interview-ready.
+
+Also, I’ll explain the error response you received, because understanding errors is an important skill in API testing.
+
+1️⃣ Why You Got This Error
+You received this response:
+
+{
+ "error":"missing_api_key",
+ "message":"The x-api-key header is required for this endpoint."
+}
+What this means
+The API now requires an API Key for authentication.
+
+The server is saying:
+
+"I will not process your request unless you send a valid API key."
+
+So the request should look like this:
+
+GET /api/users/1
+Headers:
+x-api-key: YOUR_API_KEY
+Important Learning
+Many real APIs require:
+
+API keys
+
+Tokens
+
+OAuth
+
+This is called API Authentication.
+
+We will cover this deeply later in PHASE 6.
+
+For now, the important concept is:
+
+👉 APIs often reject requests without authentication.
+
+2️⃣ Your Answer Review (Interview Style)
+You answered the practice questions. Let's refine them.
+
+Question 1
+What does API stand for?
+Your answer:
+
+Application Programming Interface
+
+✅ Correct.
+
+Interview-Ready Answer
+API stands for Application Programming Interface.
+It allows different software systems to communicate with each other through requests and responses.
+
+Question 2
+What are the two main components of API communication?
+Your answer:
+
+endpoint and methods
+
+⚠️ Close but not fully correct.
+
+The two core components are:
+
+Correct Answer
+1️⃣ Request
+2️⃣ Response
+
+Explanation
+Client sends:
+
+Request
+Server returns:
+
+Response
+Example:
+
+Request
+
+GET /api/users/1
+Response
+
+{
+ "id":1,
+ "name":"John"
+}
+Interview Tip
+Many candidates mistakenly say:
+
+❌ endpoint + method
+
+But interviewers expect:
+
+✔ Request and Response
+
+Question 3
+What role does API play between client and server?
+Your answer:
+
+it acts as a mediator which serve the command
+
+Good idea. Let's refine it.
+
+Interview-Ready Answer
+The API acts as a communication layer between the client and server.
+It receives requests from the client, processes them on the server, and returns the response.
+
+Visual Understanding
+Client (App / Browser)
+        │
+        │ Request
+        ▼
+        API
+        │
+        │ Process request
+        ▼
+     Server / Database
+        │
+        │ Response
+        ▼
+      Client
+3️⃣ Understanding the Error Response (Important for QA)
+The response you saw is actually a negative test case.
+
+{
+ "error":"missing_api_key"
+}
+This means the API correctly handled an invalid request.
+
+In automation testing we would write a test like this:
+
+import requests
+
+response = requests.get("https://reqres.in/api/users/1")
+
+print(response.status_code)
+print(response.json())
+Expected:
+
+401 Unauthorized
+or
+
+403 Forbidden
+Real QA Engineer Thinking
+A good QA will ask:
+
+What happens if API key is missing?
+
+What if API key is invalid?
+
+What if API key expired?
+
+These are negative test cases.
+
+Common Interview Question
+How do you test API authentication?
+Answer:
+
+I validate authentication by sending requests with valid tokens, invalid tokens, expired tokens, and missing tokens to ensure the API handles security correctly.
+
+4️⃣ Practice Task (Important)
+Try to analyze this API.
+
+Open this in browser:
+
+https://jsonplaceholder.typicode.com/posts/1
+Look at the response.
+
+Answer these:
+
+1️⃣ Is this Request or Response?
+2️⃣ What format is the data?
+3️⃣ How many fields are returned?
+
+Next Lesson (Very Important)
+Next we will learn:
+
+REST API Architecture
+You will understand:
+
+REST
+
+Resources
+
+Endpoints
+
+URI
+
+Stateless architecture
+
+Why 99% of modern APIs are REST
+
+This concept is asked in almost every QA / SDET interview.
+
+Also in the next lesson we will start thinking like real automation engineers. 🚀
+
+
+Is this Request or Response? this is response   What format is the data?  this data is in dictionary format of python i think this is called the jason format  How many fields are returned? userid id title body total 4 fields returned
+
+Good work, Azeez 👍 — you are observing the response correctly. Let’s review your answers like an interviewer would, fix small mistakes, and deepen your understanding.
+
+Review of Your Answers
+1️⃣ Is this Request or Response?
+Your answer: Response
+
+✅ Correct
+
+When you opened:
+
+https://jsonplaceholder.typicode.com/posts/1
+Your browser sent a GET request, and the server returned a response.
+
+Example response:
+
+{
+ "userId": 1,
+ "id": 1,
+ "title": "sunt aut facere repellat provident occaecati",
+ "body": "quia et suscipit suscipit recusandae..."
+}
+So this is the API Response Body.
+
+2️⃣ What format is the data?
+Your answer:
+
+dictionary format of python, called json
+
+You are very close, but let’s correct it slightly.
+
+Correct Answer
+The data format is JSON (JavaScript Object Notation).
+
+Interview-Ready Answer
+The API response is returned in JSON format, which is a lightweight data-interchange format used by most REST APIs.
+
+Important Clarification
+It looks like a Python dictionary, but technically it is JSON.
+
+JSON example:
+
+{
+ "userId": 1,
+ "id": 1
+}
+Python dictionary:
+
+{
+ "userId": 1,
+ "id": 1
+}
+They look similar, but JSON is a data format used for APIs, while Python dictionaries are data structures in Python.
+
+In automation we convert JSON to Python dictionary using:
+
+response.json()
+3️⃣ How many fields are returned?
+Your answer:
+
+userid id title body total 4 fields
+
+✅ Correct
+
+Fields returned:
+
+1️⃣ userId
+2️⃣ id
+3️⃣ title
+4️⃣ body
+
+Total = 4 fields
+
+How a QA Engineer Thinks When Seeing This Response
+A QA automation engineer doesn't just read the response — they validate it.
+
+Typical validations:
+
+✔ Status code
+✔ Response time
+✔ Field existence
+✔ Field data type
+✔ Field value correctness
+
+Example automation test:
+
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+
+assert response.status_code == 200
+
+data = response.json()
+
+assert data["id"] == 1
+assert "title" in data
+assert "body" in data
+Common Interview Question
+How do you validate API responses?
+Good answer:
+
+I validate API responses by checking the status code, response structure, response body fields, and expected values using assertions in automation frameworks like Pytest.
+
+Important Concept You Just Learned
+You already touched on something very important for API automation:
+
+Response Parsing
+response.json()
+This converts JSON → Python dictionary, allowing us to access fields like:
+
+data["title"]
+data["id"]
+We will use this constantly in automation.
+
+Practice Task (Real QA Thinking)
+Look again at this API:
+
+https://jsonplaceholder.typicode.com/posts/1
+Answer these:
+
+1️⃣ What HTTP method is being used here?
+2️⃣ What is the endpoint?
+3️⃣ What status code do you think this request returns?
+
+Next Lesson (Very Important)
+Next we start:
+
+REST API Architecture
+You will learn:
+
+• What REST means
+• What Resources are
+• What Endpoints are
+• What URI is
+• Why APIs are stateless
+
+This concept is extremely important in interviews and also needed to understand real API automation frameworks.
+
+After that we will start writing our first API request in Python. 🚀
+
+
+1️⃣ What HTTP method is being used here? get method is used to fetch the data here
+2️⃣ What is the endpoint? 1
+3️⃣ What status code do you think this request returns? 200
+
+Excellent effort, Azeez 👏. You’re thinking like a QA already. Let’s review your answers the way an interviewer or senior SDET would evaluate them and fix the small mistake.
+
+Review of Your Answers
+We analyzed this API:
+
+https://jsonplaceholder.typicode.com/posts/1
+1️⃣ What HTTP method is used?
+Your answer:
+
+GET method is used to fetch the data
+
+✅ Correct
+
+Why GET is used
+GET is used to retrieve data from the server without modifying it.
+
+Example request:
+
+GET /posts/1
+Interview-Ready Answer
+GET method is used to retrieve data from the server without modifying the resource.
+
+2️⃣ What is the endpoint?
+Your answer:
+
+1
+
+❌ This is not fully correct.
+
+Correct Answer
+The endpoint is:
+
+/posts/1
+Full URL:
+
+https://jsonplaceholder.typicode.com/posts/1
+Explanation
+An endpoint is the specific URL where an API resource can be accessed.
+
+Breakdown of the URL:
+
+https://jsonplaceholder.typicode.com  → Base URL
+/posts                                → Resource
+/1                                    → Resource ID
+So the endpoint is:
+
+/posts/1
+Interview-Ready Answer
+The endpoint is /posts/1, which represents the resource "post" with ID 1.
+
+3️⃣ What status code will the API return?
+Your answer:
+
+200
+
+✅ Correct
+
+Meaning of 200
+200 OK
+This means:
+
+The request was successful and the server returned the requested resource.
+
+Quick Visual Summary
+Request
+GET https://jsonplaceholder.typicode.com/posts/1
+Server Response
+
+Status Code: 200 OK
+Response Body:
+
+{
+ "userId": 1,
+ "id": 1,
+ "title": "...",
+ "body": "..."
+}
+Important Interview Tip
+Interviewers sometimes ask this tricky question:
+
+What is the difference between URL and Endpoint?
+Good answer:
+
+URL
+
+https://jsonplaceholder.typicode.com/posts/1
+Endpoint
+
+/posts/1
+Endpoint = path used to access a resource
+
+Common Beginner Mistake
+Many beginners say:
+
+Endpoint = 1
+But actually:
+
+Endpoint = /posts/1
+Real Automation Engineer Thinking
+When we test this API, we validate:
+
+1️⃣ Status code
+2️⃣ Response structure
+3️⃣ Response values
+4️⃣ Headers
+5️⃣ Response time
+
+Example automation test:
+
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+
+assert response.status_code == 200
+
+data = response.json()
+
+assert data["id"] == 1
+assert "title" in data
+assert "body" in data
+Small Practice (Important)
+Look at this API:
+
+https://jsonplaceholder.typicode.com/users/5
+Answer:
+
+1️⃣ What is the resource?
+2️⃣ What is the endpoint?
+3️⃣ What HTTP method would you use to fetch the data?
+
+Next Lesson (Very Important)
+Now we move to the core concept of modern APIs:
+
+REST API Architecture
+You will learn:
+
+• What REST means
+• What Resources are
+• What Endpoints are
+• What URI is
+• What Stateless APIs are
+• Why almost all modern companies use REST
+
+This is one of the most frequently asked SDET interview topics. 🚀
+
+
+1️⃣ What is the resource? jsonplaceholder.typicode.com
+2️⃣ What is the endpoint? users/5
+3️⃣ What HTTP method would you use to fetch the data? get
+
+Good attempt again, Azeez 👍. You are close, but there is one important correction. Understanding this clearly is very important for interviews and framework design.
+
+Let's review each answer carefully.
+
+API We Analyzed
+https://jsonplaceholder.typicode.com/users/5
+We break URLs like automation engineers do.
+
+https://jsonplaceholder.typicode.com   → Base URL
+/users                                 → Resource
+/5                                     → Resource ID
+1️⃣ What is the Resource?
+Your answer:
+
+jsonplaceholder.typicode.com
+
+❌ This is incorrect.
+
+That part is the Base URL, not the resource.
+
+Correct Answer
+The resource is:
+
+users
+Why?
+A resource represents a collection of objects in an API.
+
+Examples:
+
+/users
+/posts
+/products
+/orders
+Each resource contains multiple records.
+
+Example:
+
+/users
+returns a list of users.
+
+2️⃣ What is the Endpoint?
+Your answer:
+
+users/5
+
+✅ Almost correct.
+
+The correct format includes the /.
+
+Correct endpoint:
+
+/users/5
+Meaning
+This endpoint retrieves user with ID = 5.
+
+3️⃣ What HTTP Method Would Fetch the Data?
+Your answer:
+
+GET
+
+✅ Correct.
+
+GET is used to retrieve data from the server.
+
+Final Correct Answers
+Question	Correct Answer
+Resource	users
+Endpoint	/users/5
+Method	GET
+How a Senior QA Thinks About This API
+Request:
+
+GET https://jsonplaceholder.typicode.com/users/5
+Expected:
+
+Status Code → 200
+Response Body Example:
+
+{
+ "id": 5,
+ "name": "Chelsey Dietrich",
+ "email": "chelsey@example.com"
+}
+Automation validations:
+
+status code
+
+field validation
+
+response schema
+
+response time
+
+Interview Question (Very Common)
+What is a Resource in REST API?
+Good Answer:
+
+A resource is an object or collection of objects that can be accessed through an API endpoint. Examples include users, products, orders, or posts.
+
+Another Small Practice
+Analyze this API:
+
+https://jsonplaceholder.typicode.com/comments/10
+Answer:
+
+1️⃣ What is the resource?
+2️⃣ What is the endpoint?
+3️⃣ What HTTP method would retrieve the data?
+
+Next Lesson (Very Important)
+Now we officially begin REST API Architecture.
+
+You will learn:
+
+• What REST means
+• What URI is
+• What Resources are
+• What Stateless APIs are
+• Why companies prefer REST over SOAP
+
+Understanding REST properly will make the rest of the course 10x easier and is frequently asked in QA / SDET interviews. 🚀
+
+
+1️⃣ What is the resource? /comments
+2️⃣ What is the endpoint? /commments/103️⃣ What HTTP method would retrieve the data?
+
+Good attempt again, Azeez 👍. You understood the idea, but there are two small issues we need to correct. These details matter in QA interviews and automation frameworks.
+
+Let's analyze it step-by-step.
+
+API We Analyzed
+https://jsonplaceholder.typicode.com/comments/10
+Break the URL like an automation engineer:
+
+https://jsonplaceholder.typicode.com  → Base URL
+/comments                             → Resource
+/10                                   → Resource ID
+1️⃣ What is the resource?
+Your answer:
+
+/comments
+
+✅ Correct concept
+
+Usually we say the resource without the slash:
+
+comments
+But /comments is still acceptable when referring to the path.
+
+What Resource Means
+A resource represents a collection of objects.
+
+Examples:
+
+users
+posts
+comments
+orders
+products
+2️⃣ What is the endpoint?
+Your answer had a small typo:
+
+/commments/10
+There is an extra m.
+
+Correct endpoint
+/comments/10
+Endpoint = specific path used to access a resource
+
+3️⃣ What HTTP method would retrieve the data?
+You didn't write the answer, but the correct one is:
+
+GET
+Why GET?
+GET is used to retrieve data without modifying the server.
+
+Final Correct Answers
+Question	Correct Answer
+Resource	comments
+Endpoint	/comments/10
+HTTP Method	GET
+How QA Engineers Think When Seeing This API
+Request:
+
+GET https://jsonplaceholder.typicode.com/comments/10
+Expected validations:
+
+✔ Status Code → 200
+✔ Response contains comment data
+✔ Fields exist
+
+Example response:
+
+{
+ "postId": 2,
+ "id": 10,
+ "name": "et fugit eligendi deleniti quidem qui sint nihil autem",
+ "email": "dolorum.optio.tempora@example.com",
+ "body": "fuga nam accusamus voluptas reiciendis..."
+}
+Example Automation Test
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/comments/10")
+
+assert response.status_code == 200
+
+data = response.json()
+
+assert data["id"] == 10
+assert "email" in data
+assert "body" in data
+This is exactly the kind of validation QA engineers write.
+
+Important Concept Before Next Lesson
+So far you learned:
+
+✔ API
+✔ Request vs Response
+✔ JSON
+✔ Resource
+✔ Endpoint
+✔ HTTP Method (GET)
+
+These are the building blocks of REST APIs.
+
+Next Lesson (Major Concept)
+Now we move to one of the most important topics in API automation interviews:
+
+REST API Architecture
+You will learn:
+
+• What REST actually means
+• What URI is
+• What stateless APIs are
+• What resources are in REST
+• Why almost all modern APIs are REST
+
+This concept is asked in almost every SDET / QA Automation interview.
+
+We will also start thinking like framework designers, not just API users. 🚀
+
+
+https://jsonplaceholder.typicode.com/comments/10 but where is GET here i dont see this is just a url with resource and id
+
+Excellent question, Azeez. 👍
+This is exactly the kind of thinking a good automation engineer should have.
+
+You asked:
+
+"I only see the URL. Where is the GET method here?"
+
+That’s a very important concept in API communication.
+
+1️⃣ The URL Does NOT Contain the HTTP Method
+This URL:
+
+https://jsonplaceholder.typicode.com/comments/10
+is only the endpoint.
+
+It does not show the HTTP method.
+
+The HTTP method is part of the request sent to the server, not the URL itself.
+
+2️⃣ What Happens When You Open It in the Browser?
+When you paste a URL in a browser:
+
+https://jsonplaceholder.typicode.com/comments/10
+The browser automatically sends a GET request.
+
+Internally the browser sends:
+
+GET /comments/10 HTTP/1.1
+Host: jsonplaceholder.typicode.com
+So the browser decides to use GET because it is trying to fetch data.
+
+3️⃣ How QA Engineers Explicitly Send the GET Request
+In automation we explicitly define the HTTP method.
+
+Example using Python:
+
+import requests
+
+response = requests.get("https://jsonplaceholder.typicode.com/comments/10")
+
+print(response.status_code)
+print(response.json())
+Here you clearly see:
+
+requests.get()
+This is where GET is defined.
+
+4️⃣ Example Using cURL (Common in APIs)
+Engineers often test APIs using cURL.
+
+Example:
+
+curl -X GET https://jsonplaceholder.typicode.com/comments/10
+Here:
+
+-X GET
+specifies the HTTP method.
+
+5️⃣ Example Using Postman
+In Postman, you will see:
+
+GET   https://jsonplaceholder.typicode.com/comments/10
+Here the method is shown on the left side.
+
+Visual Understanding
+Client Request
+
+Method: GET
+Endpoint: /comments/10
+URL: https://jsonplaceholder.typicode.com/comments/10
+Important Interview Question
+How does the server know what action to perform?
+Good answer:
+
+The server determines the action based on the HTTP method (GET, POST, PUT, DELETE) and the endpoint provided in the request.
+
+Example:
+
+GET    /users     → retrieve users
+POST   /users     → create user
+PUT    /users/1   → update user
+DELETE /users/1   → delete user
+Real Industry Insight
+Modern APIs often use the same endpoint but different HTTP methods.
+
+Example:
+
+GET    /users
+POST   /users
+Same endpoint:
+
+/users
+Different actions because of HTTP method.
+
+Small Practice (Important)
+Look at this endpoint:
+
+/users
+Which HTTP method would you use for:
+
+1️⃣ Retrieve all users
+2️⃣ Create a new user
+3️⃣ Update a user
+4️⃣ Delete a user
+
+Next Lesson
+Now we move into a core REST concept:
+
+REST API Architecture
+You will learn:
+
+• What REST means
+• What URI is
+• What stateless APIs are
+• Why REST APIs are used by companies like Amazon, Netflix, and Google
+
+This will make the rest of the automation framework much easier to understand. 🚀
+
+
+
+

@@ -1,0 +1,109 @@
+PHASE 1 — API FUNDAMENTALS
+
+What is an API
+
+How APIs work
+
+REST API architecture
+
+HTTP Methods
+
+HTTP Status Codes
+
+Headers
+
+Authentication
+
+JSON structure
+
+Request vs Response
+
+Idempotency
+
+PHASE 2 — ENVIRONMENT SETUP
+
+Python installation
+
+Virtual environment
+
+Install pytest
+
+Install requests
+
+Install Playwright
+
+Project structure
+
+requirements.txt
+
+PHASE 3 — FIRST API TESTS
+
+First GET request
+
+First POST request
+
+Response validation
+
+Assertions in pytest
+
+Parsing JSON
+
+PHASE 4 — FRAMEWORK DESIGN
+
+We will build a real SDET automation framework
+
+api_automation_framework
+│
+├── tests
+├── api
+├── payloads
+├── utils
+├── config
+├── fixtures
+├── conftest.py
+├── requirements.txt
+PHASE 5 — ADVANCED AUTOMATION
+
+Dynamic payloads
+
+Faker data
+
+Data driven tests
+
+Parameterization
+
+Logging
+
+Utilities
+
+PHASE 6 — AUTHENTICATION
+
+Token auth
+
+Bearer tokens
+
+OAuth basics
+
+Token storage
+
+PHASE 7 — REAL WORLD TESTING
+
+Response schema validation
+
+Negative testing
+
+Error handling
+
+PHASE 8 — DATABASE VALIDATION
+
+(SQL for QA)
+
+SELECT
+
+WHERE
+
+JOIN
+
+GROUP BY
+
+API + DB validation
