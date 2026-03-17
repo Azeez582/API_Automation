@@ -1,0 +1,308 @@
+## ✅ Lesson 3 — REST API (Most Important for API Automation)
+
+In your **Philips HPM Support Tool**, most APIs you test will be **REST APIs**.
+
+If you understand REST properly,
+you can test:
+
+* Login API
+* Role API
+* Device API
+* Enumerator API
+* Config API
+* Backend API
+* Integration API
+
+REST is the most used API type in:
+
+* Philips Healthcare
+* Siemens Healthineers
+* GE Healthcare
+* Web apps
+* Support tools
+* Backend services
+
+---
+
+## 🔹 1. What is REST API
+
+REST = Representational State Transfer
+
+Simple meaning:
+
+> REST API = API that uses HTTP methods to send and receive data
+
+REST APIs use:
+
+* URL
+* HTTP method
+* Headers
+* Body
+* Response
+
+Example:
+
+```text
+GET /api/devices
+POST /api/login
+GET /api/features
+POST /api/connect
+```
+
+These are REST APIs.
+
+---
+
+## 🔹 2. How REST API works in HPM Support Tool
+
+Real flow:
+
+```text
+WPF UI → REST API → Backend → DB / Device → Response → UI
+```
+
+Example — Login
+
+```text
+POST /api/login
+```
+
+Example — Get devices
+
+```text
+GET /api/devices
+```
+
+Example — Get features by role
+
+```text
+GET /api/features
+```
+
+Example — Connect device
+
+```text
+POST /api/connect
+```
+
+QA must test these APIs.
+
+---
+
+## 🔹 3. Structure of REST API
+
+Every REST API has 5 parts.
+
+| Part         | Example             |
+| ------------ | ------------------- |
+| URL          | /api/login          |
+| Method       | POST                |
+| Headers      | token, content-type |
+| Request body | username, password  |
+| Response     | JSON                |
+
+Example:
+
+Request:
+
+```http
+POST /api/login
+```
+
+Body:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+QA validates response.
+
+---
+
+## 🔹 4. HTTP Methods in REST API
+
+Very important for automation.
+
+| Method | Use            |
+| ------ | -------------- |
+| GET    | Read data      |
+| POST   | Create / login |
+| PUT    | Update         |
+| DELETE | Delete         |
+| PATCH  | Partial update |
+
+In HPM support tool you will mostly use:
+
+✅ GET
+✅ POST
+✅ PUT
+✅ DELETE
+
+Example:
+
+| API      | Method |
+| -------- | ------ |
+| /login   | POST   |
+| /devices | GET    |
+| /connect | POST   |
+| /config  | PUT    |
+| /logs    | GET    |
+| /user    | DELETE |
+
+QA must test all.
+
+---
+
+## 🔹 5. REST API returns JSON
+
+Most healthcare tools use JSON.
+
+Example:
+
+```json
+{
+  "deviceId": "123",
+  "status": "connected"
+}
+```
+
+Example role response:
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator", "connect", "logs"]
+}
+```
+
+QA must check JSON.
+
+Later we will parse JSON in Python.
+
+---
+
+## 🔹 6. Why REST API is used in Philips / HPM
+
+Because REST is:
+
+✅ Simple
+✅ Fast
+✅ Secure
+✅ Works with UI / WPF / Web
+✅ Works with devices
+✅ Works with DB
+✅ Easy to automate
+
+Almost all modern medical tools use REST.
+
+---
+
+## 🔹 7. Real QA Scenario (HPM)
+
+Test login API
+
+```text
+POST /api/login
+```
+
+Check:
+
+* Status code = 200
+* Token present
+* Role correct
+
+Test role API
+
+```text
+GET /api/features
+```
+
+Check:
+
+* FSE → full features
+* User → limited features
+
+Test device API
+
+```text
+GET /api/devices
+```
+
+Check:
+
+* Device list correct
+* Status correct
+
+Test connect API
+
+```text
+POST /api/connect
+```
+
+Check:
+
+* Device connected
+* Backend updated
+
+This is real API testing.
+
+---
+
+## 🔹 8. What you will automate later
+
+Using Python:
+
+```
+requests.get()
+requests.post()
+pytest
+assert
+json
+token
+headers
+fixtures
+```
+
+We will do step-by-step.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What is REST API?**
+
+Answer:
+
+REST API is an API that uses HTTP methods like GET, POST, PUT, DELETE to communicate between client and server.
+In healthcare systems REST APIs are used for login, device communication, role validation, and backend data access.
+
+---
+
+## ✅ Lesson 3 Completed
+
+You learned:
+
+✔ What is REST
+✔ REST in HPM
+✔ REST structure
+✔ HTTP methods
+✔ JSON response
+✔ Real scenarios
+
+---
+
+## Next Lesson
+
+Lesson 4 – HTTP Methods (Deep understanding with real examples)

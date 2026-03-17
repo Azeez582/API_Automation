@@ -1,0 +1,272 @@
+## ✅ Lesson 1 — How APIs are used in **Hospital Patient Monitoring Systems (HPM)**
+
+You are working on a **Philips Hospital Patient Monitoring System Support Tool**, so before learning API automation, you must understand **how APIs exist inside real hospital software**.
+
+In real healthcare products, API is not theory — it connects:
+
+* UI ↔ Backend
+* Backend ↔ Database
+* Backend ↔ Device
+* Tool ↔ Monitor hardware
+* Tool ↔ Hospital network
+* Tool ↔ User roles
+
+This is exactly the type of system used in **Philips / Siemens / GE Healthcare**.
+
+---
+
+## 🏥 1. What is a Hospital Patient Monitoring System (HPM)
+
+A Patient Monitoring System is used in:
+
+* ICU
+* Operation Theater
+* Emergency
+* Ward monitoring
+* Central monitoring station
+
+It monitors:
+
+* Heart rate
+* SPO2
+* ECG
+* Blood pressure
+* Temperature
+* Respiration
+
+And sends data to:
+
+* Monitor screen
+* Central station
+* Support tool
+* Database
+* Remote service tool
+
+Your **Support Tool** is used by:
+
+* Field Service Engineer
+* R&D
+* Admin
+* Clinical user
+* Normal user
+
+---
+
+## 🧩 2. Real Architecture of HPM System
+
+Typical architecture in Philips-like systems:
+
+```
+Monitor Device  →  Backend Service  →  Database
+                       ↓
+                 API Layer
+                       ↓
+                Support Tool UI (WPF)
+```
+
+or
+
+```
+UI → API → Service → DB
+UI → API → Device
+UI → API → Auth Server
+```
+
+So when user clicks button in UI → API call happens.
+
+---
+
+## 🔹 Example from your Support Tool
+
+User clicks:
+
+```
+Login
+```
+
+Internally:
+
+```
+UI → API → /login → backend → DB → response → UI
+```
+
+User clicks:
+
+```
+Enumerator screen
+```
+
+Internally:
+
+```
+UI → API → /devices/list → backend → device service → response
+```
+
+User connects cable:
+
+```
+UI → API → /connectDevice
+```
+
+User role changes:
+
+```
+UI → API → /getFeaturesByRole
+```
+
+So every feature = API call
+
+---
+
+## 🔹 Example APIs in HPM Support Tool
+
+| Feature          | API            |
+| ---------------- | -------------- |
+| Login            | /api/login     |
+| Get role         | /api/user/role |
+| Get features     | /api/features  |
+| Get devices      | /api/devices   |
+| Connect device   | /api/connect   |
+| Get logs         | /api/logs      |
+| Get patient data | /api/patient   |
+| Service mode     | /api/service   |
+| Admin config     | /api/config    |
+
+QA must test all these APIs.
+
+---
+
+## 🧪 3. Why API testing is VERY IMPORTANT in Healthcare
+
+In medical software:
+
+UI test alone is not enough.
+
+Because:
+
+* UI may hide errors
+* API may send wrong data
+* Device may send wrong values
+* Role permissions must be correct
+* Wrong data = patient risk
+
+So companies like Philips test:
+
+✅ API
+✅ UI
+✅ DB
+✅ Device
+✅ Integration
+
+Example:
+
+```
+API returns wrong SPO2 value → monitor shows wrong value → patient risk
+```
+
+So API testing is critical.
+
+---
+
+## 🔹 Real QA Scenario (Philips type)
+
+Scenario:
+
+Field Service Engineer logs in.
+
+Expected:
+
+* Can see Enumerator
+* Can see Device list
+* Can connect monitor
+
+Normal user logs in.
+
+Expected:
+
+* Cannot see Enumerator
+* Cannot connect device
+
+This means API must return different data.
+
+Example:
+
+```
+GET /features
+```
+
+Response for FSE:
+
+```
+["enumerator", "connect", "logs"]
+```
+
+Response for Normal user:
+
+```
+["dashboard"]
+```
+
+QA must validate API response.
+
+This is API automation.
+
+---
+
+## 🧪 4. Where API automation is used in your project
+
+In your HPM support tool, API automation will test:
+
+✅ Login API
+✅ Role API
+✅ Feature API
+✅ Device API
+✅ Enumerator API
+✅ Hardware API
+✅ Config API
+✅ Logs API
+✅ Backend validation
+
+Later we will automate using:
+
+* Python
+* Pytest
+* Requests
+* JSON
+* Token auth
+* Role testing
+* DB validation
+
+---
+
+## 🧠 Interview Question (Real)
+
+**Q: Why API testing is important in medical device software?**
+
+Answer:
+
+* UI depends on API
+* Wrong API data can affect patient safety
+* Role permissions must be validated
+* Backend must be correct
+* Device integration depends on API
+* API testing is faster than UI
+* Required for regulated software
+
+---
+
+## ✅ Lesson 1 Completed
+
+You now understand:
+
+* How API is used in HPM
+* How UI calls API
+* How roles affect API
+* Why API testing is critical in Philips-like systems
+* Where automation will be used
+
+---
+
+## Next Lesson
+
+Lesson 2 – What is API (from scratch, deep understanding)

@@ -1,0 +1,258 @@
+## ✅ Lesson 2 — What is API (From Scratch, Real QA Engineer Explanation)
+
+Now we go step-by-step from basics.
+
+You are working on **Philips HPM Support Tool**, so understand API in **real product context**, not textbook.
+
+---
+
+## 🔹 1. What is API (Simple Meaning)
+
+API = Application Programming Interface
+
+Simple meaning:
+
+> API is a way for one software to talk to another software.
+
+In your project:
+
+```
+WPF UI → API → Backend → Database
+```
+
+UI cannot directly talk to DB or device.
+It must go through API.
+
+So API = middle layer
+
+---
+
+## 🔹 2. Real Example from HPM Support Tool
+
+User clicks Login.
+
+What happens internally:
+
+```
+UI → API → Backend → DB → Response → UI
+```
+
+API example:
+
+```
+POST /api/login
+```
+
+Request:
+
+```
+username = azeez
+password = ****
+```
+
+Response:
+
+```
+token = abc123
+role = FSE
+```
+
+UI uses response to show screen.
+
+QA must test this API.
+
+---
+
+## 🔹 3. Why API exists (Very important)
+
+Without API:
+
+❌ UI cannot get data
+❌ Device cannot send data
+❌ Backend cannot send response
+❌ Role logic cannot work
+❌ Security cannot work
+
+With API:
+
+✅ UI gets data
+✅ Device sends data
+✅ Role control works
+✅ Backend validation works
+✅ Secure login works
+
+In medical systems, API controls everything.
+
+---
+
+## 🔹 4. API in Hospital Patient Monitoring System
+
+Real flow:
+
+```
+Monitor Device → Backend → API → Support Tool UI
+```
+
+Example:
+
+Device sends heart rate
+
+```
+Device → API → /vitals → backend → DB → UI
+```
+
+Support tool shows device list
+
+```
+UI → API → /devices → backend → device service
+```
+
+Role check
+
+```
+UI → API → /features → backend → role service
+```
+
+Enumerator screen
+
+```
+UI → API → /enumerator → backend → hardware service
+```
+
+So every feature = API.
+
+---
+
+## 🔹 5. Types of API used in Healthcare Products
+
+In Philips / Siemens / GE systems mostly used:
+
+| Type         | Used for                 |
+| ------------ | ------------------------ |
+| REST API     | Most common              |
+| HTTP API     | Web / tool communication |
+| Internal API | Service to service       |
+| Device API   | Hardware connection      |
+| Auth API     | Login / token            |
+| Config API   | Settings                 |
+| DB API       | Data access              |
+
+You will mostly test:
+
+✅ REST API
+✅ HTTP API
+✅ Auth API
+✅ Role API
+✅ Device API
+
+---
+
+## 🔹 6. What QA tests in API
+
+QA does NOT just send request.
+
+QA validates:
+
+✔ Status code
+✔ Response body
+✔ JSON data
+✔ Role permissions
+✔ DB data
+✔ Error handling
+✔ Security
+✔ Integration
+
+Example:
+
+```
+GET /devices
+```
+
+Check:
+
+* Status = 200
+* Device list correct
+* Role allowed
+* DB data correct
+
+This is API testing.
+
+---
+
+## 🔹 7. Real Scenario (Philips type)
+
+Login as Admin
+
+```
+POST /login
+```
+
+Expect:
+
+```
+role = admin
+features = all
+```
+
+Login as Normal user
+
+```
+POST /login
+```
+
+Expect:
+
+```
+role = user
+features = limited
+```
+
+QA must validate API.
+
+Later we will automate this.
+
+---
+
+## 🔹 8. API vs UI vs DB (Very important)
+
+| Layer   | What it does |
+| ------- | ------------ |
+| UI      | Screen       |
+| API     | Logic        |
+| Backend | Processing   |
+| DB      | Data         |
+| Device  | Hardware     |
+
+QA in healthcare tests all.
+
+Your automation will test API layer.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What is API?**
+
+Answer:
+
+API is an interface that allows communication between UI, backend, database, and devices.
+In healthcare systems APIs are used for login, role control, device communication, and data transfer.
+
+---
+
+## ✅ Lesson 2 Completed
+
+You learned:
+
+✔ What is API
+✔ Why API exists
+✔ API in HPM
+✔ API in support tool
+✔ What QA tests in API
+✔ Real scenarios
+
+---
+
+## Next Lesson
+
+Lesson 3 – REST API (Most important for automation)
