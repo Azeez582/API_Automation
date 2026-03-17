@@ -1,0 +1,390 @@
+## ✅ Lesson 8 — Request vs Response (Very Important Before API Automation)
+
+Before writing API automation, you must clearly understand:
+
+> What is Request
+> What is Response
+> What QA validates in each
+
+In your **Philips HPM Support Tool**, every action is:
+
+```
+Request → API → Backend → Response
+```
+
+Without understanding this, API automation will be confusing.
+
+---
+
+## 🔹 1. What is Request
+
+Request = What client sends to server
+
+Client can be:
+
+* WPF UI
+* Support Tool
+* Automation script
+* Postman
+* Playwright
+* Python requests
+
+Example:
+
+```
+POST /api/login
+```
+
+Request contains:
+
+| Part    | Example             |
+| ------- | ------------------- |
+| URL     | /api/login          |
+| Method  | POST                |
+| Headers | token, content-type |
+| Body    | username, password  |
+
+Example request:
+
+```http
+POST /api/login
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+This is request.
+
+---
+
+## 🔹 2. What is Response
+
+Response = What server sends back
+
+Response contains:
+
+| Part        | Example      |
+| ----------- | ------------ |
+| Status code | 200          |
+| Headers     | content-type |
+| Body        | JSON         |
+
+Example response:
+
+```http
+Status: 200
+```
+
+Body:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+This is response.
+
+QA validates response.
+
+---
+
+## 🔹 3. Real Flow in HPM Support Tool
+
+User clicks Login
+
+```
+UI → Request → API → Backend → DB → Response → UI
+```
+
+Example:
+
+Request:
+
+```
+POST /login
+```
+
+Response:
+
+```
+token + role
+```
+
+Next request:
+
+```
+GET /features
+```
+
+Response:
+
+```
+features list
+```
+
+Next request:
+
+```
+GET /devices
+```
+
+Response:
+
+```
+device list
+```
+
+Everything works using request/response.
+
+---
+
+## 🔹 4. What QA checks in Request
+
+QA checks:
+
+✔ correct URL
+✔ correct method
+✔ correct headers
+✔ correct body
+✔ correct token
+✔ correct role
+✔ correct payload
+
+Example bug:
+
+Wrong request body
+
+```
+password missing
+```
+
+Expected:
+
+```
+400 error
+```
+
+QA must test this.
+
+---
+
+## 🔹 5. What QA checks in Response
+
+QA checks:
+
+✔ status code
+✔ JSON structure
+✔ data correct
+✔ role correct
+✔ permission correct
+✔ DB match
+✔ device match
+
+Example:
+
+```
+GET /features
+```
+
+Response:
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator"]
+}
+```
+
+QA checks:
+
+* role correct
+* feature correct
+
+---
+
+## 🔹 6. Real Scenario — Role Based API
+
+Request:
+
+```
+GET /features
+Authorization: Bearer USER123
+```
+
+Response:
+
+```json
+{
+  "features": ["dashboard"]
+}
+```
+
+Request:
+
+```
+GET /features
+Authorization: Bearer FSE123
+```
+
+Response:
+
+```json
+{
+  "features": ["enumerator","connect","logs"]
+}
+```
+
+Same request
+Different response
+Because header different.
+
+Very common in your project.
+
+---
+
+## 🔹 7. Real Scenario — Device API
+
+Request:
+
+```
+GET /devices
+Authorization: Bearer FSE123
+```
+
+Response:
+
+```json
+[
+  {"id":1,"status":"connected"}
+]
+```
+
+QA checks:
+
+* correct device
+* correct status
+* matches backend
+
+Later we will validate with DB.
+
+---
+
+## 🔹 8. Real Scenario — Error Handling
+
+Request:
+
+```
+GET /devices
+(no token)
+```
+
+Response:
+
+```
+401
+```
+
+Request:
+
+```
+GET /enumerator
+user token
+```
+
+Response:
+
+```
+403
+```
+
+Request:
+
+```
+wrong URL
+```
+
+Response:
+
+```
+404
+```
+
+Automation must check all.
+
+---
+
+## 🔹 9. How automation works (later)
+
+Python:
+
+```python
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.status_code)
+
+print(response.json())
+```
+
+Automation sends request
+Automation checks response
+
+This is API automation.
+
+---
+
+## 🔹 10. Real QA thinking (Senior level)
+
+When API tested, QA thinks:
+
+* What request sent?
+* What response expected?
+* What role?
+* What status code?
+* What JSON?
+* What DB?
+* What device?
+* What UI change?
+
+This is real Philips-level testing.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What is request and response in API testing?**
+
+Answer:
+
+Request is the data sent from client to server including URL, method, headers, and body.
+Response is the data returned from server including status code and JSON body.
+In API testing we validate both request and response.
+
+---
+
+## ✅ Lesson 8 Completed
+
+You learned:
+
+✔ Request
+✔ Response
+✔ What QA checks
+✔ Role-based response
+✔ Error response
+✔ Device response
+✔ Real HPM scenarios
+✔ Automation flow
+
+---
+
+## Next Lesson
+
+Lesson 9 – Authentication (Token / Bearer / Session) (Very important for your project)

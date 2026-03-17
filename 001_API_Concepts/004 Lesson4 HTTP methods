@@ -1,0 +1,301 @@
+## ✅ Lesson 4 — HTTP Methods (Deep Understanding with Real HPM Examples)
+
+In **REST API**, the most important concept is **HTTP Methods**.
+
+Every API call you test in your **Philips HPM Support Tool** will use one of these methods.
+
+Without understanding HTTP methods, you cannot do API automation.
+
+---
+
+## 🔹 1. What are HTTP Methods
+
+HTTP methods tell the server **what action to perform**.
+
+| Method | Meaning                    |
+| ------ | -------------------------- |
+| GET    | Read data                  |
+| POST   | Create / Login / Send data |
+| PUT    | Update data                |
+| DELETE | Delete data                |
+| PATCH  | Partial update             |
+
+In healthcare support tools, most used:
+
+✅ GET
+✅ POST
+✅ PUT
+✅ DELETE
+
+---
+
+## 🔹 2. Real Flow in HPM Support Tool
+
+```text
+UI → API → Backend → DB / Device → Response → UI
+```
+
+HTTP method decides what API will do.
+
+Example:
+
+| Action         | API          | Method |
+| -------------- | ------------ | ------ |
+| Login          | /api/login   | POST   |
+| Get devices    | /api/devices | GET    |
+| Connect device | /api/connect | POST   |
+| Update config  | /api/config  | PUT    |
+| Delete user    | /api/user    | DELETE |
+
+QA must test all.
+
+---
+
+## 🔹 3. GET Method (Read Data)
+
+GET = Fetch data from server
+
+Example:
+
+```http
+GET /api/devices
+```
+
+Response:
+
+```json
+[
+  {"id":1,"status":"connected"},
+  {"id":2,"status":"disconnected"}
+]
+```
+
+Used in HPM for:
+
+* Device list
+* Logs
+* Features
+* Role data
+* Patient data
+
+QA checks:
+
+* Status code
+* Data correct
+* Role allowed
+* No error
+
+Real scenario:
+
+FSE → can see devices
+User → cannot see devices
+
+So API must return different data.
+
+---
+
+## 🔹 4. POST Method (Create / Send Data)
+
+POST = send data to server
+
+Used for:
+
+* Login
+* Connect device
+* Create config
+* Send command
+* Add user
+
+Example login:
+
+```http
+POST /api/login
+```
+
+Body:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+QA checks:
+
+* Token present
+* Role correct
+* Status code
+* Error handling
+
+---
+
+## 🔹 5. PUT Method (Update Data)
+
+PUT = update existing data
+
+Used for:
+
+* Update settings
+* Update config
+* Update device info
+* Update user
+
+Example:
+
+```http
+PUT /api/config
+```
+
+Body:
+
+```json
+{
+  "mode": "service"
+}
+```
+
+Response:
+
+```json
+{
+  "status": "updated"
+}
+```
+
+QA checks:
+
+* Update success
+* DB updated
+* Role allowed
+
+---
+
+## 🔹 6. DELETE Method (Remove Data)
+
+DELETE = remove data
+
+Used for:
+
+* Delete user
+* Delete config
+* Remove device
+* Clear logs
+
+Example:
+
+```http
+DELETE /api/user/5
+```
+
+Response:
+
+```json
+{
+  "status": "deleted"
+}
+```
+
+QA checks:
+
+* User removed
+* DB updated
+* Permission correct
+
+---
+
+## 🔹 7. Real Role-Based Scenario (Very Important)
+
+Admin login
+
+```http
+GET /api/features
+```
+
+Response:
+
+```json
+["enumerator","config","logs","connect"]
+```
+
+Normal user login
+
+```http
+GET /api/features
+```
+
+Response:
+
+```json
+["dashboard"]
+```
+
+Same API
+Different response
+Because role is different.
+
+QA must test this.
+
+This is very common in Philips tools.
+
+---
+
+## 🔹 8. What Automation Engineer will do
+
+Using Python:
+
+```python
+requests.get()
+requests.post()
+requests.put()
+requests.delete()
+```
+
+And check:
+
+```python
+assert response.status_code == 200
+```
+
+We will do this in next lessons.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What are HTTP methods used in REST API?**
+
+Answer:
+
+Common HTTP methods are GET, POST, PUT, DELETE, PATCH.
+GET is used to read data, POST to create, PUT to update, DELETE to remove.
+In healthcare systems these methods are used for login, device communication, role validation, and configuration.
+
+---
+
+## ✅ Lesson 4 Completed
+
+You learned:
+
+✔ GET
+✔ POST
+✔ PUT
+✔ DELETE
+✔ Real HPM examples
+✔ Role-based API behavior
+✔ What QA validates
+
+---
+
+## Next Lesson
+
+Lesson 5 – Status Codes (Very important for API testing)

@@ -1,0 +1,336 @@
+## ✅ Lesson 7 — JSON (Very Important for API Automation)
+
+In your **Philips HPM Support Tool**, almost every API request and response uses **JSON**.
+
+If you don’t understand JSON, you cannot do:
+
+* API testing
+* API automation
+* Payload validation
+* Role validation
+* Device validation
+* DB validation
+
+JSON is used in all healthcare backend APIs.
+
+---
+
+## 🔹 1. What is JSON
+
+JSON = JavaScript Object Notation
+
+Simple meaning:
+
+> JSON is a data format used to send data between UI, API, backend, and database.
+
+Example JSON:
+
+```json
+{
+  "username": "azeez",
+  "role": "FSE"
+}
+```
+
+JSON is used in:
+
+* Request body
+* Response body
+* Config
+* Device data
+* Role data
+* Logs
+* Patient data
+
+---
+
+## 🔹 2. Where JSON is used in HPM Support Tool
+
+Example login
+
+Request:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+Example devices
+
+Response:
+
+```json
+[
+  {"id": 1, "status": "connected"},
+  {"id": 2, "status": "disconnected"}
+]
+```
+
+Example features
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator", "connect", "logs"]
+}
+```
+
+QA must validate JSON.
+
+---
+
+## 🔹 3. JSON Structure
+
+JSON has:
+
+| Type   | Example          |
+| ------ | ---------------- |
+| Object | { }              |
+| Array  | [ ]              |
+| Key    | "name"           |
+| Value  | "azeez", 1, true |
+
+Example object:
+
+```json
+{
+  "name": "azeez",
+  "age": 25
+}
+```
+
+Example array:
+
+```json
+[
+  {"id":1},
+  {"id":2}
+]
+```
+
+Example nested JSON:
+
+```json
+{
+  "user": {
+    "name": "azeez",
+    "role": "FSE"
+  }
+}
+```
+
+Nested JSON very common in real APIs.
+
+---
+
+## 🔹 4. Real API JSON (HPM type)
+
+Login response:
+
+```json
+{
+  "token": "abc123",
+  "user": {
+    "name": "azeez",
+    "role": "FSE",
+    "permissions": [
+      "enumerator",
+      "connect",
+      "logs"
+    ]
+  }
+}
+```
+
+QA must check:
+
+* token exists
+* role correct
+* permissions correct
+
+Automation will parse JSON.
+
+---
+
+## 🔹 5. JSON in Role-Based API
+
+FSE login:
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator", "config", "logs"]
+}
+```
+
+Normal user login:
+
+```json
+{
+  "role": "user",
+  "features": ["dashboard"]
+}
+```
+
+Same API
+Different JSON
+Based on role.
+
+Very important in your project.
+
+---
+
+## 🔹 6. JSON in Device API
+
+Example:
+
+```json
+{
+  "deviceId": 10,
+  "status": "connected",
+  "model": "IntelliVue",
+  "ip": "10.1.1.5"
+}
+```
+
+QA checks:
+
+* deviceId correct
+* status correct
+* model correct
+
+In healthcare this is critical.
+
+---
+
+## 🔹 7. JSON in Config API
+
+Example:
+
+```json
+{
+  "mode": "service",
+  "logging": true,
+  "port": 8080
+}
+```
+
+QA checks:
+
+* mode updated
+* DB updated
+* UI updated
+
+Integration testing.
+
+---
+
+## 🔹 8. How automation reads JSON (later)
+
+Python:
+
+```python
+data = response.json()
+
+print(data["role"])
+```
+
+Nested:
+
+```python
+data["user"]["role"]
+```
+
+Array:
+
+```python
+data["features"][0]
+```
+
+We will do this later step-by-step.
+
+---
+
+## 🔹 9. Real QA Scenario (Philips type)
+
+Call:
+
+```
+GET /features
+```
+
+Response:
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator","connect"]
+}
+```
+
+QA checks:
+
+✔ role correct
+✔ features correct
+✔ no missing data
+✔ no extra data
+✔ correct type
+
+Automation must validate JSON.
+
+---
+
+## 🔹 10. Why JSON is important in healthcare testing
+
+Because:
+
+* Device data comes in JSON
+* Backend sends JSON
+* UI reads JSON
+* Logs stored as JSON
+* Config stored as JSON
+* Role permissions in JSON
+
+So JSON knowledge is mandatory.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What is JSON in API testing?**
+
+Answer:
+
+JSON is a data format used to send request and response in APIs.
+In API testing we validate JSON fields, values, structure, and permissions.
+
+---
+
+## ✅ Lesson 7 Completed
+
+You learned:
+
+✔ What is JSON
+✔ Object / array / nested
+✔ JSON in HPM
+✔ JSON in role API
+✔ JSON in device API
+✔ JSON validation
+✔ JSON in automation
+
+---
+
+## Next Lesson
+
+Lesson 8 – Request vs Response (Very important before coding)

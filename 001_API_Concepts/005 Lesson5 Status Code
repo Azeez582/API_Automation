@@ -1,0 +1,378 @@
+## ✅ Lesson 5 — HTTP Status Codes (Very Important for API Testing)
+
+When you test APIs in **Philips HPM Support Tool**, the first thing QA checks is:
+
+> Did API return correct status code?
+
+Status code tells whether API succeeded or failed.
+
+In real healthcare software, wrong status code = bug.
+
+---
+
+## 🔹 1. What is Status Code
+
+When API is called, server returns response like:
+
+```http
+Status Code + Response Body
+```
+
+Example:
+
+```http
+POST /api/login
+Status: 200
+```
+
+Example error:
+
+```http
+POST /api/login
+Status: 401
+```
+
+QA must validate status code in every API test.
+
+---
+
+## 🔹 2. Status Code Categories
+
+| Range | Meaning      |
+| ----- | ------------ |
+| 1xx   | Info         |
+| 2xx   | Success      |
+| 3xx   | Redirect     |
+| 4xx   | Client error |
+| 5xx   | Server error |
+
+In API automation we mostly check:
+
+✅ 200
+✅ 201
+✅ 204
+✅ 400
+✅ 401
+✅ 403
+✅ 404
+✅ 500
+
+---
+
+## 🔹 3. 200 — Success
+
+Most common.
+
+Means API worked.
+
+Example:
+
+```http
+GET /api/devices
+Status: 200
+```
+
+Response:
+
+```json
+[
+  {"id":1,"status":"connected"}
+]
+```
+
+QA check:
+
+* status = 200
+* data correct
+
+Real HPM example:
+
+* Get devices
+* Get features
+* Get logs
+* Get config
+
+---
+
+## 🔹 4. 201 — Created
+
+Used when new data created.
+
+Example:
+
+```http
+POST /api/user
+Status: 201
+```
+
+Meaning:
+
+User created.
+
+Used in:
+
+* Add user
+* Create config
+* Add device
+* Add role
+
+QA checks:
+
+* status 201
+* data created in DB
+
+---
+
+## 🔹 5. 204 — No Content
+
+Means success but no data.
+
+Example:
+
+```http
+DELETE /api/user/5
+Status: 204
+```
+
+Used in:
+
+* Delete user
+* Clear logs
+* Remove device
+
+QA checks:
+
+* status correct
+* DB updated
+
+---
+
+## 🔹 6. 400 — Bad Request
+
+Client sent wrong data.
+
+Example:
+
+```http
+POST /api/login
+```
+
+Body missing password.
+
+Response:
+
+```http
+Status: 400
+```
+
+QA checks:
+
+* error message correct
+* API handles invalid data
+
+Important in medical software.
+
+---
+
+## 🔹 7. 401 — Unauthorized
+
+User not logged in / token missing.
+
+Example:
+
+```http
+GET /api/devices
+```
+
+Without token.
+
+Response:
+
+```http
+401 Unauthorized
+```
+
+Used in:
+
+* Login required
+* Token expired
+* Wrong token
+
+QA must test security.
+
+---
+
+## 🔹 8. 403 — Forbidden
+
+User logged in but no permission.
+
+Very common in role-based apps.
+
+Example:
+
+Normal user calls:
+
+```http
+GET /api/enumerator
+```
+
+Response:
+
+```http
+403 Forbidden
+```
+
+Because only FSE allowed.
+
+Very important for your project.
+
+QA must test role permissions.
+
+---
+
+## 🔹 9. 404 — Not Found
+
+API not found.
+
+Example:
+
+```http
+GET /api/device123
+```
+
+Response:
+
+```http
+404
+```
+
+QA checks:
+
+* proper error
+* no crash
+
+---
+
+## 🔹 10. 500 — Server Error
+
+Backend failure.
+
+Very serious in healthcare.
+
+Example:
+
+```http
+GET /api/devices
+```
+
+Response:
+
+```http
+500
+```
+
+Means backend crashed.
+
+QA must report.
+
+In Philips type projects → critical bug.
+
+---
+
+## 🔹 11. Real HPM Testing Scenario
+
+Login API
+
+Expected:
+
+```
+200
+```
+
+Wrong password
+
+```
+401
+```
+
+Missing field
+
+```
+400
+```
+
+Get features as user
+
+```
+403
+```
+
+Delete user
+
+```
+204
+```
+
+Wrong API
+
+```
+404
+```
+
+Backend crash
+
+```
+500
+```
+
+Automation must check all.
+
+---
+
+## 🔹 12. How automation will check
+
+Later using Python:
+
+```python
+response = requests.get(url)
+
+assert response.status_code == 200
+```
+
+or
+
+```python
+assert response.status_code == 403
+```
+
+Status code validation is mandatory.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What status codes do you validate in API testing?**
+
+Answer:
+
+Common status codes are 200, 201, 204, 400, 401, 403, 404, 500.
+We validate success, error handling, authentication, authorization, and server failures.
+
+---
+
+## ✅ Lesson 5 Completed
+
+You learned:
+
+✔ What status code is
+✔ All important codes
+✔ Role-based errors
+✔ Security errors
+✔ Real HPM scenarios
+✔ What QA validates
+
+---
+
+## Next Lesson
+
+Lesson 6 – Headers (Very important for Token / Auth / Role APIs)

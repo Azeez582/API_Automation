@@ -1,0 +1,388 @@
+## ✅ Lesson 9 — Authentication (Token / Bearer / Session) — Very Important for HPM Support Tool
+
+In your **Philips Hospital Patient Monitoring Support Tool**, almost every API requires **authentication**.
+
+Without authentication:
+
+* API will return 401
+* Role will not work
+* Features will not load
+* Device APIs will fail
+* Enumerator will not work
+* Config will not open
+
+So this lesson is very important.
+
+---
+
+## 🔹 1. What is Authentication in API
+
+Authentication means:
+
+> Server checks who you are before giving access
+
+Example:
+
+```text
+Login → get token → send token → access API
+```
+
+Flow:
+
+```text
+Login API → token → header → next API
+```
+
+This is used in almost all enterprise / healthcare apps.
+
+---
+
+## 🔹 2. Real Flow in HPM Support Tool
+
+```text
+UI → /login → token
+UI → /features (with token)
+UI → /devices (with token)
+UI → /enumerator (with token)
+UI → /connect (with token)
+```
+
+Without token:
+
+```
+401 Unauthorized
+```
+
+QA must test authentication.
+
+---
+
+## 🔹 3. Types of Authentication used in API
+
+Most common in healthcare systems:
+
+| Type             | Used         |
+| ---------------- | ------------ |
+| Token            | Very common  |
+| Bearer token     | Very common  |
+| Session          | Desktop apps |
+| Basic auth       | Old systems  |
+| OAuth / SSO      | Enterprise   |
+| Role-based token | Very common  |
+
+In your project most likely:
+
+✅ Bearer token
+✅ Role token
+✅ Session
+✅ Header auth
+
+---
+
+## 🔹 4. Token Authentication (Most common)
+
+Step 1 — Login
+
+```http
+POST /api/login
+```
+
+Body:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+Step 2 — Use token
+
+```http
+GET /api/devices
+Authorization: Bearer abc123
+```
+
+Without token:
+
+```
+401
+```
+
+QA must test this.
+
+---
+
+## 🔹 5. Bearer Token (Most used in REST)
+
+Header format:
+
+```http
+Authorization: Bearer <token>
+```
+
+Example:
+
+```http
+Authorization: Bearer abc123xyz
+```
+
+Used in:
+
+* Login session
+* Role APIs
+* Device APIs
+* Config APIs
+* Enumerator APIs
+
+Your support tool will use this.
+
+---
+
+## 🔹 6. Role-Based Authentication (Very important for your project)
+
+Login as FSE
+
+Response:
+
+```json
+{
+  "token": "111",
+  "role": "FSE"
+}
+```
+
+Login as User
+
+```json
+{
+  "token": "222",
+  "role": "USER"
+}
+```
+
+Call same API
+
+```
+GET /features
+```
+
+FSE:
+
+```
+200 → full features
+```
+
+User:
+
+```
+403 → limited features
+```
+
+QA must test role permission.
+
+Very common in Philips tools.
+
+---
+
+## 🔹 7. Session Authentication (Common in desktop / WPF)
+
+Sometimes token not visible.
+
+Server creates session.
+
+Flow:
+
+```
+Login → session id → cookie → next API
+```
+
+Header example:
+
+```
+Cookie: sessionid=abc123
+```
+
+Used in:
+
+* Old tools
+* WPF apps
+* Internal tools
+
+QA must check session works.
+
+---
+
+## 🔹 8. Real HPM Scenario
+
+Login
+
+```
+POST /login
+```
+
+Get token
+
+```
+abc123
+```
+
+Call:
+
+```
+GET /devices
+Authorization: Bearer abc123
+```
+
+Call:
+
+```
+GET /enumerator
+Authorization: Bearer abc123
+```
+
+Call:
+
+```
+POST /connect
+Authorization: Bearer abc123
+```
+
+Call:
+
+```
+GET /config
+Authorization: Bearer abc123
+```
+
+Everything depends on auth.
+
+---
+
+## 🔹 9. QA Test Scenarios for Authentication
+
+Test 1 — Valid login
+
+```
+Expect 200
+```
+
+Test 2 — Wrong password
+
+```
+401
+```
+
+Test 3 — No token
+
+```
+401
+```
+
+Test 4 — Wrong token
+
+```
+401
+```
+
+Test 5 — User role access admin API
+
+```
+403
+```
+
+Test 6 — Expired token
+
+```
+401
+```
+
+Test 7 — FSE access device API
+
+```
+200
+```
+
+These are real test cases.
+
+---
+
+## 🔹 10. How automation will do login (later)
+
+Python:
+
+```python
+response = requests.post(url, json=payload)
+
+token = response.json()["token"]
+
+headers = {
+    "Authorization": f"Bearer {token}"
+}
+```
+
+Next API:
+
+```python
+requests.get(url, headers=headers)
+```
+
+This is real API automation.
+
+---
+
+## 🔹 11. Why Authentication is critical in Healthcare
+
+Because:
+
+* Patient data protected
+* Device control restricted
+* Service mode restricted
+* Config restricted
+* Logs restricted
+* Admin restricted
+
+Medical software must be secure.
+
+So auth testing mandatory.
+
+---
+
+## 🧠 Interview Question
+
+**Q: How authentication works in API testing?**
+
+Answer:
+
+First we call login API and get token.
+Then we send token in Authorization header for next APIs.
+We validate correct access, role permissions, and error responses.
+
+---
+
+## ✅ Lesson 9 Completed
+
+You learned:
+
+✔ Token auth
+✔ Bearer token
+✔ Session
+✔ Role-based auth
+✔ Real HPM flow
+✔ QA scenarios
+✔ Automation flow
+
+---
+
+## Next Lesson (Last in Fundamentals)
+
+Lesson 10 – Role-Based APIs (Very important for your project)

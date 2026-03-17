@@ -1,0 +1,326 @@
+## ✅ Lesson 6 — Headers (Very Important for Token / Auth / Role APIs)
+
+In your **Philips HPM Support Tool**, most APIs will not work without **Headers**.
+
+Headers are used for:
+
+* Authentication token
+* Content type
+* Role validation
+* Session
+* Security
+* Device communication
+
+In real healthcare systems, almost every API call has headers.
+
+---
+
+## 🔹 1. What are Headers
+
+Headers = extra information sent with API request.
+
+Request format:
+
+```http
+POST /api/login
+Headers
+Body
+```
+
+Headers tell server:
+
+* Who are you
+* What data format
+* What token
+* What role
+* What session
+
+---
+
+## 🔹 2. Real Example — Login API
+
+Request:
+
+```http
+POST /api/login
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "username": "azeez",
+  "password": "123"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "abc123",
+  "role": "FSE"
+}
+```
+
+Next API must send token in header.
+
+---
+
+## 🔹 3. Authorization Header (Most Important)
+
+After login, server gives token.
+
+Next request must send token.
+
+Example:
+
+```http
+GET /api/devices
+Authorization: Bearer abc123
+```
+
+Without header:
+
+```http
+401 Unauthorized
+```
+
+This is very common in:
+
+* Philips tools
+* Role-based apps
+* Secure systems
+* Medical software
+
+QA must test this.
+
+---
+
+## 🔹 4. Content-Type Header
+
+Tells server what format we send.
+
+Most common:
+
+```http
+Content-Type: application/json
+```
+
+Used in POST / PUT.
+
+Example:
+
+```http
+POST /api/connect
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "deviceId": 5
+}
+```
+
+If header missing → API may fail.
+
+QA must test.
+
+---
+
+## 🔹 5. Accept Header
+
+Tells what format we expect.
+
+Example:
+
+```http
+Accept: application/json
+```
+
+Server returns JSON.
+
+Sometimes used in enterprise APIs.
+
+---
+
+## 🔹 6. Real Flow in HPM Support Tool
+
+Login
+
+```http
+POST /login
+```
+
+Response:
+
+```json
+token = abc123
+role = FSE
+```
+
+Next call:
+
+```http
+GET /devices
+Authorization: Bearer abc123
+```
+
+Next call:
+
+```http
+GET /features
+Authorization: Bearer abc123
+```
+
+Next call:
+
+```http
+POST /connect
+Authorization: Bearer abc123
+Content-Type: application/json
+```
+
+All APIs use headers.
+
+---
+
+## 🔹 7. Role-Based API using Headers
+
+FSE token:
+
+```http
+Authorization: Bearer FSE123
+```
+
+Response:
+
+```json
+features = all
+```
+
+User token:
+
+```http
+Authorization: Bearer USER123
+```
+
+Response:
+
+```json
+features = limited
+```
+
+Same API
+Different header
+Different response
+
+QA must test this.
+
+Very common in your project.
+
+---
+
+## 🔹 8. Real QA Scenario (Philips type)
+
+Test without token
+
+Expected:
+
+```
+401
+```
+
+Test with wrong token
+
+```
+401
+```
+
+Test with user token
+
+```
+403
+```
+
+Test with FSE token
+
+```
+200
+```
+
+Test with admin token
+
+```
+200 + full data
+```
+
+Automation must validate all.
+
+---
+
+## 🔹 9. How automation will send headers
+
+Later we use Python:
+
+```python
+headers = {
+    "Authorization": "Bearer abc123",
+    "Content-Type": "application/json"
+}
+
+response = requests.get(url, headers=headers)
+```
+
+Headers are mandatory in API automation.
+
+---
+
+## 🔹 10. Why headers important in medical software
+
+Because:
+
+* Security required
+* Role control required
+* Device access restricted
+* Config restricted
+* Logs restricted
+* Admin features restricted
+
+Healthcare software must be secure.
+
+So headers always used.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What are headers in API?**
+
+Answer:
+
+Headers are additional information sent with API request such as authorization token, content type, and session data.
+In role-based healthcare applications headers are used for authentication and permission validation.
+
+---
+
+## ✅ Lesson 6 Completed
+
+You learned:
+
+✔ What headers are
+✔ Authorization header
+✔ Content-Type
+✔ Role-based headers
+✔ Token usage
+✔ Real HPM scenarios
+✔ How automation sends headers
+
+---
+
+## Next Lesson
+
+Lesson 7 – JSON (Very important for API automation)
