@@ -1,0 +1,336 @@
+## ✅ Lesson 10 — Role-Based APIs (Very Important for HPM Support Tool)
+
+In your **Philips Hospital Patient Monitoring Support Tool**, the application is **role-based**.
+
+That means:
+
+* Different users see different UI
+* Different users call different APIs
+* Same API returns different data
+* Some APIs allowed only for specific roles
+
+So QA must test **Role-Based API behavior**.
+
+This lesson is very important for your project.
+
+---
+
+## 🔹 1. What is Role-Based API
+
+Role-based API means:
+
+> API response depends on user role
+
+Example roles in your project:
+
+* Normal User
+* R&D
+* Medic / Clinical
+* Field Service Engineer (FSE)
+* Admin
+
+Same API → different response.
+
+---
+
+## 🔹 2. Real Flow in HPM Support Tool
+
+Login:
+
+```
+POST /login
+```
+
+Response:
+
+```
+token + role
+```
+
+Next API:
+
+```
+GET /features
+Authorization: Bearer token
+```
+
+Backend checks role → sends features.
+
+Flow:
+
+```
+Login → token → role → header → API → response based on role
+```
+
+---
+
+## 🔹 3. Example — Features API
+
+API:
+
+```
+GET /api/features
+```
+
+### Normal user
+
+Response:
+
+```json
+{
+  "role": "USER",
+  "features": ["dashboard"]
+}
+```
+
+### FSE
+
+```json
+{
+  "role": "FSE",
+  "features": ["enumerator","connect","logs"]
+}
+```
+
+### Admin
+
+```json
+{
+  "role": "ADMIN",
+  "features": ["enumerator","connect","logs","config","users"]
+}
+```
+
+Same API
+Different JSON
+
+QA must test this.
+
+---
+
+## 🔹 4. Example — Enumerator API (Real scenario)
+
+Enumerator should work only for FSE / Admin.
+
+API:
+
+```
+GET /enumerator
+```
+
+Normal user:
+
+```
+403 Forbidden
+```
+
+FSE:
+
+```
+200 OK
+```
+
+Admin:
+
+```
+200 OK
+```
+
+QA must validate permission.
+
+This is very common in Philips tools.
+
+---
+
+## 🔹 5. Example — Device API
+
+API:
+
+```
+GET /devices
+```
+
+User:
+
+```
+limited list
+```
+
+FSE:
+
+```
+full list
+```
+
+Admin:
+
+```
+all devices
+```
+
+QA must check response.
+
+---
+
+## 🔹 6. Example — Config API
+
+API:
+
+```
+PUT /config
+```
+
+User:
+
+```
+403
+```
+
+FSE:
+
+```
+403
+```
+
+Admin:
+
+```
+200
+```
+
+Config must be restricted.
+
+Very important in healthcare.
+
+---
+
+## 🔹 7. Real QA Test Cases for Role APIs
+
+Test login as User
+
+```
+/features → dashboard only
+/enumerator → 403
+/devices → limited
+/config → 403
+```
+
+Test login as FSE
+
+```
+/features → enumerator present
+/enumerator → 200
+/devices → full
+/config → 403
+```
+
+Test login as Admin
+
+```
+/features → all
+/enumerator → 200
+/devices → all
+/config → 200
+```
+
+This is real automation scenario.
+
+---
+
+## 🔹 8. Why Role Testing is critical in Healthcare
+
+Because:
+
+* Only engineer can connect device
+* Only admin can change config
+* Only medic can view patient
+* Only service can open enumerator
+
+Wrong permission = serious issue.
+
+So role API testing mandatory.
+
+---
+
+## 🔹 9. How automation will test roles (later)
+
+Flow:
+
+```
+Login as role
+Get token
+Call API
+Check response
+```
+
+Python example:
+
+```python
+token = login("FSE")
+
+headers = {
+    "Authorization": f"Bearer {token}"
+}
+
+response = requests.get("/features", headers=headers)
+
+assert "enumerator" in response.json()["features"]
+```
+
+We will do this later step-by-step.
+
+---
+
+## 🔹 10. Real Project Scenario (Your type project)
+
+Support Tool
+
+Roles:
+
+* Service engineer → enumerator + connect
+* Clinical → patient data
+* User → dashboard
+* Admin → config + users
+
+APIs must return correct data.
+
+QA must automate this.
+
+---
+
+## 🧠 Interview Question
+
+**Q: What is role-based API testing?**
+
+Answer:
+
+Role-based API testing verifies that different users get correct permissions and responses from APIs based on their roles.
+We validate authorization, response data, and access control.
+
+---
+
+## ✅ PHASE 1 – API FUNDAMENTALS COMPLETED
+
+You learned:
+
+✔ API
+✔ REST
+✔ HTTP methods
+✔ Status codes
+✔ Headers
+✔ JSON
+✔ Request / Response
+✔ Authentication
+✔ Role-based APIs
+
+Now you are ready for coding.
+
+---
+
+## Next Phase
+
+## PHASE 2 — ENVIRONMENT SETUP
+
+Next Lesson:
+
+Lesson 11 – Install Python, Pytest, Requests, Playwright, Virtual Env, Project Setup (Real API automation setup)
