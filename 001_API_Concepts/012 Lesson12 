@@ -1,0 +1,209 @@
+Good. We will redo **Lesson 12** but now using a **real public API** so you can practice at home.
+We will use **ReqRes API** because it supports login, token, status codes, errors — similar to HPM support tool login.
+
+We will use this real API:
+
+```
+https://reqres.in/api/login
+```
+
+This API returns token → good for auth practice.
+
+---
+
+## ✅ Lesson 12 (Updated) — First API using real URL (ReqRes)
+
+We will create:
+
+```
+api/login_api.py
+features/api.feature
+features/steps/api_steps.py
+```
+
+Same structure, real API.
+
+---
+
+## ✅ 1. Real API details
+
+URL:
+
+```
+https://reqres.in/api/login
+```
+
+Method:
+
+```
+POST
+```
+
+Body:
+
+```json
+{
+  "email": "eve.holt@reqres.in",
+  "password": "cityslicka"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "QpwL5tke4Pnpja7X"
+}
+```
+
+---
+
+## ✅ 2. Create api/login_api.py
+
+```
+api/login_api.py
+```
+
+Code:
+
+```python
+import requests
+
+BASE_URL = "https://reqres.in/api"
+
+
+def login(email, password):
+
+    url = f"{BASE_URL}/login"
+
+    payload = {
+        "email": email,
+        "password": password
+    }
+
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post(
+        url,
+        json=payload,
+        headers=headers
+    )
+
+    return response
+```
+
+Correct enterprise style.
+
+---
+
+## ✅ 3. Create feature file
+
+```
+features/api.feature
+```
+
+Code:
+
+```gherkin
+Feature: Login API
+
+  Scenario: Valid login
+
+    When I call login API with email "eve.holt@reqres.in" and password "cityslicka"
+
+    Then response status should be 200
+```
+
+---
+
+## ✅ 4. Create step file
+
+```
+features/steps/api_steps.py
+```
+
+Code:
+
+```python
+from behave import when, then
+from api.login_api import login
+
+
+@when('I call login API with email "{email}" and password "{password}"')
+def step_impl(context, email, password):
+
+    context.response = login(email, password)
+
+
+@then("response status should be 200")
+def step_impl(context):
+
+    assert context.response.status_code == 200
+```
+
+---
+
+## ✅ 5. Add token validation (important)
+
+Add new step.
+
+Feature:
+
+```gherkin
+Then token should be present
+```
+
+Step:
+
+```python
+@then("token should be present")
+def step_impl(context):
+
+    data = context.response.json()
+
+    assert "token" in data
+```
+
+This is real API validation.
+
+---
+
+## ✅ 6. This is similar to HPM login
+
+ReqRes:
+
+```
+login → token
+```
+
+HPM:
+
+```
+login → token → role → features
+```
+
+Same concept.
+
+Good practice.
+
+---
+
+## ✅ 7. What you learned
+
+* Real API
+* POST request
+* JSON payload
+* Status code
+* Token
+* Behave step
+* API layer
+
+Now training becomes real.
+
+---
+
+## Next Lesson
+
+Lesson 13 — Invalid login test (error handling, 400, negative testing)
