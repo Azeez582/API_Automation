@@ -1,0 +1,333 @@
+## ✅ Lesson 11 — Environment Setup (Python + Pytest + Requests + Virtual Env + Project Setup)
+
+Now we start **PHASE 2 — ENVIRONMENT SETUP**
+
+This step is very important because in real companies (Philips / Siemens / GE),
+automation always runs inside a **proper Python environment + project structure**.
+
+We will setup:
+
+* Python
+* Virtual Environment
+* Pytest
+* Requests
+* Playwright (later used)
+* Project folder
+* requirements.txt
+
+This is exactly how real QA automation projects start.
+
+---
+
+## 🔹 1. Check Python Installation
+
+Open terminal / command prompt.
+
+Run:
+
+```bash
+python --version
+```
+
+or
+
+```bash
+python3 --version
+```
+
+Expected:
+
+```
+Python 3.x.x
+```
+
+In most automation projects:
+
+✅ Python 3.8+
+✅ Python 3.9+
+✅ Python 3.10+
+
+Philips-type projects often use **fixed version**.
+
+Example:
+
+```
+Python 3.10
+```
+
+---
+
+## 🔹 2. Why Virtual Environment is needed
+
+In real projects:
+
+* Different projects use different versions
+* Different libraries required
+* Cannot install globally
+
+So we create:
+
+```
+virtual environment (venv)
+```
+
+It keeps project isolated.
+
+Real automation always uses venv.
+
+---
+
+## 🔹 3. Create Project Folder
+
+Create folder:
+
+```
+HPM_API_AUTOMATION
+```
+
+Inside open terminal.
+
+Example:
+
+```bash
+mkdir HPM_API_AUTOMATION
+cd HPM_API_AUTOMATION
+```
+
+This will be your framework root.
+
+---
+
+## 🔹 4. Create Virtual Environment
+
+Run:
+
+```bash
+python -m venv venv
+```
+
+Folder created:
+
+```
+venv/
+```
+
+Activate venv.
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux / Mac:
+
+```bash
+source venv/bin/activate
+```
+
+After activation:
+
+```
+(venv) C:\HPM_API_AUTOMATION>
+```
+
+This means correct.
+
+---
+
+## 🔹 5. Install Required Libraries
+
+Install pytest:
+
+```bash
+pip install pytest
+```
+
+Install requests:
+
+```bash
+pip install requests
+```
+
+Install playwright (later used for UI / API mix):
+
+```bash
+pip install playwright
+```
+
+Optional but common:
+
+```bash
+pip install faker
+pip install python-dotenv
+pip install pytest-html
+```
+
+Real projects use these.
+
+---
+
+## 🔹 6. Create requirements.txt
+
+Save installed packages.
+
+Run:
+
+```bash
+pip freeze > requirements.txt
+```
+
+File created:
+
+```
+requirements.txt
+```
+
+Used in real projects for CI/CD.
+
+Example inside:
+
+```
+pytest
+requests
+playwright
+faker
+```
+
+---
+
+## 🔹 7. Real Project Structure (Basic)
+
+Create folders:
+
+```
+HPM_API_AUTOMATION
+│
+├── tests
+├── api
+├── utils
+├── config
+├── payloads
+├── fixtures
+├── requirements.txt
+```
+
+We will build real framework later.
+
+For now just create folders.
+
+Windows:
+
+```bash
+mkdir tests api utils config payloads fixtures
+```
+
+---
+
+## 🔹 8. Verify Pytest Works
+
+Create file:
+
+```
+tests/test_sample.py
+```
+
+Code:
+
+```python
+def test_sample():
+    assert 1 == 1
+```
+
+Run:
+
+```bash
+pytest
+```
+
+Expected:
+
+```
+1 passed
+```
+
+If this works → setup correct.
+
+---
+
+## 🔹 9. Verify Requests Works
+
+Create file:
+
+```
+tests/test_request.py
+```
+
+Code:
+
+```python
+import requests
+
+def test_get():
+    r = requests.get("https://httpbin.org/get")
+    assert r.status_code == 200
+```
+
+Run:
+
+```
+pytest
+```
+
+If passed → ready for API automation.
+
+---
+
+## 🔹 10. Real Company Setup (Important)
+
+In real Philips / Healthcare projects:
+
+Always used:
+
+✅ venv
+✅ requirements.txt
+✅ pytest
+✅ requests
+✅ config folder
+✅ utils
+✅ fixtures
+✅ framework structure
+
+You are now doing real setup.
+
+---
+
+## 🧠 Interview Question
+
+**Q: Why virtual environment is used in automation?**
+
+Answer:
+
+Virtual environment isolates dependencies for each project, avoids conflicts, and allows reproducible setup using requirements.txt.
+
+---
+
+## ✅ Lesson 11 Completed
+
+You learned:
+
+✔ Python check
+✔ venv
+✔ pytest install
+✔ requests install
+✔ playwright install
+✔ requirements.txt
+✔ project folder
+✔ test run
+
+---
+
+## Next Lesson
+
+Lesson 12 — First API Test (GET request using requests + pytest)
